@@ -11,18 +11,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private final UserRepository userRepository;
 
     private final UserMapper userMapper;
 
     @Override
     public List<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(userMapper::toDTO).toList();
+        System.out.println("----------------------------------");
+        System.out.println(userRepository.findAll());
+        System.out.println("----------------------------------");
+        return null;
     }
 
     @Override
