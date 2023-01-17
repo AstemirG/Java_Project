@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users", schema = "authorization")
+@Table(name = "user", schema = "authorization")
 @Getter
 @Setter
 @NoArgsConstructor
