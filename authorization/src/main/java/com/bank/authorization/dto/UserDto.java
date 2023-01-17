@@ -1,10 +1,11 @@
 package com.bank.authorization.dto;
 
 import com.bank.authorization.model.UserEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -15,12 +16,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class UserDto implements Serializable {
     private Long id;
-    @Size(max = 40)
     @NotNull
     private String role;
     @NotNull
     private Long profileId;
-    @Size(max = 500)
     @NotNull
     private String password;
 }

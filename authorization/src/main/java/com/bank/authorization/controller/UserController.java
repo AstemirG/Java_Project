@@ -5,7 +5,12 @@ import com.bank.authorization.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -21,16 +26,16 @@ public class UserController {
 
     @PostMapping("/createNewUser")
     public ResponseEntity<UserDto> createNewUser(@RequestBody UserDto userDto) {
-        return new ResponseEntity<>(userService.saveUser(userDto),HttpStatus.OK);
+        return new ResponseEntity<>(userService.saveUser(userDto), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/get")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(userService.getUserById(id),HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
 
     @PutMapping("{id}/update")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
-        return new ResponseEntity<>(userService.updateUser(id,userDto),HttpStatus.OK);
+        return new ResponseEntity<>(userService.updateUser(id, userDto), HttpStatus.OK);
     }
 }

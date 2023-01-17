@@ -1,10 +1,18 @@
 package com.bank.authorization.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -20,29 +28,31 @@ public class UserEntity {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Size(max = 40)
     @NotNull
-    @Column(name = "role", nullable = false, length = 40)
+    @Column(name = "role", nullable = false)
     private String role;
 
     @NotNull
     @Column(name = "profile_id", nullable = false)
     private Long profileId;
 
-    @Size(max = 500)
     @NotNull
-    @Column(name = "password", nullable = false, length = 500, unique = true)
+    @Column(name = "password", nullable = false, unique = true)
     private String password;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
-        return Objects.equals(id, that.id)
-                && Objects.equals(role, that.role)
-                && Objects.equals(profileId, that.profileId)
-                && Objects.equals(password, that.password);
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final UserEntity that = (UserEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(role, that.role) &&
+                Objects.equals(profileId, that.profileId) &&
+                Objects.equals(password, that.password);
     }
 
     @Override
