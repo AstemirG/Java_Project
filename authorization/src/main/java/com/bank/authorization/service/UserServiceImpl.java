@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
+
+/**
+ * Класс в котором происходит вся бизнес-логика, мапинг между энтити и дто
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -21,11 +23,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
-    @Override
-    public List<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(userMapper::toDTO).toList();
-    }
-
+    /**
+     * @param id id пользователя, которого необходимо найти.
+     *  Метод, который находит в базе пользователя по id преобразует в дто и отдает контроллеру
+     * @return ДТО одного пользователя
+     */
     @Override
     public UserDto getUserById(Long id) {
         final UserEntity user = userRepository.findById(id).orElseThrow(
@@ -33,6 +35,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDTO(user);
     }
 
+    /**
+     * @param userDto Пользователь которого надо сохранить
+     * @return Возвращает сохраненного пользователя
+     */
     @Override
     @Transactional
     public UserDto saveUser(UserDto userDto) {
@@ -41,19 +47,29 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    /**
+     * @param id id Пользователя, который записывается в dto и обновляется
+     * @param userDto Все остальные данные который передаются для обновления
+     * @return Возвращает обновленного пользователя
+     */
     @Override
     @Transactional
     public UserDto updateUser(Long id, UserDto userDto) {
+        userDto.setId(id);
         final UserEntity userEntity = userMapper.toEntity(userDto);
         userRepository.save(userEntity);
         return userDto;
     }
 
+    /**
+     * @param ids Лист id пользователей, которых надо найти
+     * @return Возвращает список найденных пользователей в виде dto
+     */
     @Override
     public List<UserDto> getUsersByIds(List<Long> ids) {
         return ids.stream()
                 .map(x -> userRepository.findById(x).orElseThrow(
-                        () -> new EntityNotFoundException("Пользователь с id " + x + " не найден!")))
+                        () -> new EntityNotFoundException("Юзера с id " + x + " нет!")))
                 .map(userMapper::toDTO)
                 .toList();
     }

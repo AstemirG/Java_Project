@@ -4,8 +4,10 @@ import com.bank.authorization.dto.UserDto;
 
 import java.util.List;
 
+/**
+ * Интерфейс класса с бизнес-логикой
+ */
 public interface UserService {
-    List<UserDto> getAllUsers();
     UserDto getUserById(Long id);
     UserDto saveUser(UserDto userDto);
     UserDto updateUser(Long id, UserDto userDto);

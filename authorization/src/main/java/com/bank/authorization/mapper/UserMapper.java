@@ -5,6 +5,9 @@ import com.bank.authorization.model.UserEntity;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
+/**
+ * Маппер, который преобразует дто в энтити и обратно
+ */
 @Mapper(componentModel = "spring")
 @Component
 public interface UserMapper {

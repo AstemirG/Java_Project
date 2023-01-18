@@ -14,8 +14,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 
+/**
+ * Класс сущности, который связан с таблицей в БД
+ */
 @Entity
-@Table(name = "audit", schema = "authorization")
+@Table(name = "audit", schema = "auth")
 @Getter
 @Setter
 @NoArgsConstructor
