@@ -31,3 +31,4 @@ public class AuditDto implements Serializable {
     @NotNull
     private String entityJson;
 }
+
